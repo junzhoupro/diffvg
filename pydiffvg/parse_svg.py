@@ -581,3 +581,23 @@ def svg_to_scene(filename):
     ret = parse_scene(root)
     os.chdir(cwd)
     return ret
+
+def obj_to_scene(filename):
+    """
+        Load from a obj file and convert to PyTorch tensors.
+    """
+    f = open(filename)
+    lines = f.readlines()
+    data_lines = []
+    vertices = []
+    faces = []
+    for line in lines:
+        l=line.split()
+        #vertex
+        if(l[0] == "v"):
+            vertices.append(l)
+        #face
+        elif(l[0] == "f"):
+            faces.append(l)
+        data_lines.append(l)
+    return vertices, faces
